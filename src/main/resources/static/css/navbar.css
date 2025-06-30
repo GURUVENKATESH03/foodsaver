@@ -1,0 +1,42 @@
+.navbar{
+    overflow: hidden;
+    background-color: black;
+    font-family: "poppins", sans-serif;
+}
+
+.nav-list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+    justify-content: space-evenly;
+
+}
+
+.nav-item{
+    height: auto;
+    border-radius: 5px;
+}
+
+.nav-item a{
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-style: normal;
+}
+
+
+
+.Line{
+    margin: 7px 0;
+    background-color: white;
+    height: 2px;
+    width: 50%;
+}
+
+.nav-item:hover .Line{
+    width: 95%;
+    transition: width 0.3s ease-in-out, background-color 0.3s;
+    background-color: blue;
+    justify-self: center;
+}
