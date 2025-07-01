@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
-    <title>Stitch Design</title>
+    <title>Meal Share</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
 
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
@@ -32,6 +32,7 @@
           </div>
           <div class="flex flex-1 justify-end gap-8">
             <div class="flex items-center gap-9">
+                Don't have an account? Register
             </div>
             <a th:href="@{/register}">
               <button
@@ -87,7 +88,7 @@
               </label>
             </div>
               <p class="text-[#688273] text-sm font-normal leading-normal pb-3 pt-1 px-4 underline">
-                <a th:href="@{/forgot-password}">Forgot password?</a>
+                <a th:href="@{/forgotPassword}">Forgot password?</a>
               </p>
 
               <div class="flex px-4 py-3">
@@ -100,9 +101,9 @@
               </div>
             </form>
 
-            <p class="text-[#688273] text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center underline">
+            <!--<p class="text-[#688273] text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center underline">
               <a th:href="@{/register}">Don't have an account? Sign up</a>
-            </p>
+            </p>-->
           </div>
         </div>
       </div>

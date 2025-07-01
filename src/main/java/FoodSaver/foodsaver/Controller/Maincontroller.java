@@ -73,6 +73,10 @@ public class Maincontroller {
         }
     }
 
+    @GetMapping("/forgotPassword")
+    public String forgotPasswordPage() {
+        return "forgotPassword";  // Return the forgot password page view
+    }
 
     @GetMapping("/dashboard")
     public String dashboard() {
