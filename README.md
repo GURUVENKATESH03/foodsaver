@@ -56,7 +56,7 @@
 
 #### Frontend:
 
-* **React.js** or **Thymeleaf**
+* **React.js** and **Thymeleaf**
 * **Tailwind CSS** for clean and responsive UI
 
 #### Database:
