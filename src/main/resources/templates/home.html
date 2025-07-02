@@ -29,17 +29,7 @@
               <a class="text-[#111714] text-sm font-medium leading-normal" href="#how">How it works</a>
               <a class="text-[#111714] text-sm font-medium leading-normal" href="#contactus">Contact</a>
             </div>
-            <div class="flex gap-2">
-              <button
-                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#38e07b] text-[#111714] text-sm font-bold leading-normal tracking-[0.015em]"
-              >
-                <span class="truncate"> <a th:href="@{/login}">Login</a></span>
-              </button>
-              <button
-                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#f0f4f2] text-[#111714] text-sm font-bold leading-normal tracking-[0.015em]"
-              >
-                <span class="truncate"> Register</span>
-            </div>
+
           </div>
         </header>
         <div class="px-40 flex flex-1 justify-center py-5">
@@ -61,15 +51,19 @@
                     </h2>
                   </div>
                   <div class="flex-wrap gap-3 flex justify-center">
+                <a th:href="@{/login}">
                     <button
                 class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#38e07b] text-[#111714] text-sm font-bold leading-normal tracking-[0.015em]"
               >
                 <span class="truncate">Login</span>
               </button>
+            </a>
+            <a th:href="@{/register}">
               <button
                 class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-[#f0f4f2] text-[#111714] text-sm font-bold leading-normal tracking-[0.015em]"
               >
                 <span class="truncate">Register</span>
+            </a>
                   </div>
                 </div>
               </div>
