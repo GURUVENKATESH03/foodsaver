@@ -42,66 +42,71 @@
             </button>
           </div>
         </header>
-        <div class="px-40 flex flex-1 justify-center py-5">
-          <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1">
-            <h2 class="text-[#111714] tracking-light text-[28px] font-bold leading-tight px-4 text-center pb-3 pt-5">Welcome to FoodConnect</h2>
-            <div class="pb-3">
-              <div class="flex border-b border-[#dce5df] px-4 gap-8">
-                <a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-[#648772] pb-[13px] pt-4" href="#">
+        <form th:action="@{/register}" method="post">
+            <div class="px-40 flex flex-1 justify-center py-5">
+            <div class="layout-content-container flex flex-col w-[512px] max-w-[512px] py-5 max-w-[960px] flex-1">
+                <h2 class="text-[#111714] tracking-light text-[28px] font-bold leading-tight px-4 text-center pb-3 pt-5">Welcome to FoodConnect</h2>
+                <div class="pb-3">
+                <div class="flex border-b border-[#dce5df] px-4 gap-8">
+                    <a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-[#648772] pb-[13px] pt-4" href="#">
 
-                </a>
-                <a class="flex flex-col items-center justify-center border-b-[3px] border-b-[#111714] text-[#111714] pb-[13px] pt-4" href="#">
-                  <p class="text-[#111714] text-sm font-bold leading-normal tracking-[0.015em]">Register</p>
-                </a>
-              </div>
-            </div>
-            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-              <label class="flex flex-col min-w-40 flex-1">
-                <select
-                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111714] focus:outline-0 focus:ring-0 border border-[#dce5df] bg-white focus:border-[#dce5df] h-14 bg-[image:--select-button-svg] placeholder:text-[#648772] p-[15px] text-base font-normal leading-normal"
-                >
-                  <option value="none">Select Role</option>
-                  <option value="User">User</option>
-                  <option value="Admin">Admin</option>
-                </select>
-              </label>
-            </div>
-            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-              <label class="flex flex-col min-w-40 flex-1">
-                <input
-                  placeholder="Email"
-                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111714] focus:outline-0 focus:ring-0 border border-[#dce5df] bg-white focus:border-[#dce5df] h-14 placeholder:text-[#648772] p-[15px] text-base font-normal leading-normal"
-                  value=""
-                />
-              </label>
-            </div>
-            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-              <label class="flex flex-col min-w-40 flex-1">
-                <input
-                  placeholder="Password"
-                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111714] focus:outline-0 focus:ring-0 border border-[#dce5df] bg-white focus:border-[#dce5df] h-14 placeholder:text-[#648772] p-[15px] text-base font-normal leading-normal"
-                  value=""
-                />
-              </label>
-            </div>
-            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-              <label class="flex flex-col min-w-40 flex-1">
-                <input
-                  placeholder="Confirm Password"
-                  class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111714] focus:outline-0 focus:ring-0 border border-[#dce5df] bg-white focus:border-[#dce5df] h-14 placeholder:text-[#648772] p-[15px] text-base font-normal leading-normal"
-                  value=""
-                />
-              </label>
-            </div>
-            <div class="flex px-4 py-3">
-              <button
-                class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 flex-1 bg-[#38e07b] text-[#111714] text-sm font-bold leading-normal tracking-[0.015em]"
+                    </a>
+                    <a class="flex flex-col items-center justify-center border-b-[3px] border-b-[#111714] text-[#111714] pb-[13px] pt-4" href="#">
+                    <p class="text-[#111714] text-sm font-bold leading-normal tracking-[0.015em]">Register</p>
+                    </a>
+                </div>
+                </div>
+                <div class="flex flex-wrap gap-3 p-4">
+              <label
+                class="text-sm font-medium leading-normal flex items-center justify-center rounded-xl border border-[#dce5df] px-4 h-11 text-[#111714] has-[:checked]:border-[3px] has-[:checked]:px-3.5 has-[:checked]:border-[#38e07b] relative cursor-pointer"
               >
-                <span class="truncate">Register</span>
-              </button>
+                User
+                <input type="radio" name="role" th:value="USER" class="invisible absolute" />
+              </label>
+              <label
+                class="text-sm font-medium leading-normal flex items-center justify-center rounded-xl border border-[#dce5df] px-4 h-11 text-[#111714] has-[:checked]:border-[3px] has-[:checked]:px-3.5 has-[:checked]:border-[#38e07b] relative cursor-pointer"
+              >
+                Admin
+                <input type="radio" name="role" value="ADMIN" class="invisible absolute"  />
+              </label>
             </div>
-            <!--<p class="text-[#648772] text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center underline">Already have an account? Sign in</p>-->
-          </div>
+                <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                <label class="flex flex-col min-w-40 flex-1">
+                    <input
+                    placeholder="Email"
+                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111714] focus:outline-0 focus:ring-0 border border-[#dce5df] bg-white focus:border-[#dce5df] h-14 placeholder:text-[#648772] p-[15px] text-base font-normal leading-normal"
+                    value="email"
+                    />
+                </label>
+                </div>
+                <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                <label class="flex flex-col min-w-40 flex-1">
+                    <input
+                    placeholder="Password"
+                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111714] focus:outline-0 focus:ring-0 border border-[#dce5df] bg-white focus:border-[#dce5df] h-14 placeholder:text-[#648772] p-[15px] text-base font-normal leading-normal"
+                    value="password"
+                    />
+                </label>
+                </div>
+                <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                <label class="flex flex-col min-w-40 flex-1">
+                    <input
+                    placeholder="Confirm Password"
+                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#111714] focus:outline-0 focus:ring-0 border border-[#dce5df] bg-white focus:border-[#dce5df] h-14 placeholder:text-[#648772] p-[15px] text-base font-normal leading-normal"
+                    value="confirmpassword"
+                    />
+                </label>
+                </div>
+                <div class="flex px-4 py-3">
+                <button
+                    class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 flex-1 bg-[#38e07b] text-[#111714] text-sm font-bold leading-normal tracking-[0.015em]"
+                >
+                    <span class="truncate">Register</span>
+                </button>
+                </div>
+                <!--<p class="text-[#648772] text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center underline">Already have an account? Sign in</p>-->
+            </div>
+        </form>
         </div>
       </div>
     </div>

@@ -33,6 +33,15 @@ public class Maincontroller {
         return "register";
     }
 
+    //note
+    // yet to be completed
+    @PostMapping("/register")
+    public String register(
+        @RequestParam String email,@RequestParam("role") String role, @RequestParam String password,@RequestParam String confirmPassword, Model model){
+            return "redirect:/dashboard";  // need to do the reamining stuff
+
+    }
+
     @GetMapping("/login")
     public String loginPage(){
         return "login";  // Return the login page view
