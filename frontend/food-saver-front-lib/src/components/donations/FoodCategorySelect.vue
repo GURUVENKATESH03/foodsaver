@@ -6,14 +6,19 @@
       type="button"
       @click="selectCategory(category.id)"
       :class="[
-        'flex flex-col items-center p-3 rounded-xl border-2 transition-all duration-200',
+        'flex flex-col items-center gap-1.5 p-3.5 border-2 rounded-xl transition-all duration-200 cursor-pointer',
         modelValue === category.id
-          ? 'border-primary-500 bg-primary-50 text-primary-700'
-          : 'border-secondary-200 hover:border-primary-300 text-secondary-600'
+          ? 'border-[var(--color-primary)] bg-[var(--color-primary)]/8'
+          : 'border-[var(--color-border)] bg-white hover:border-[var(--color-primary)]/40'
       ]"
     >
-      <span class="text-2xl mb-1">{{ category.icon }}</span>
-      <span class="text-xs font-medium text-center">{{ category.label }}</span>
+      <span class="text-2xl leading-none">{{ category.icon }}</span>
+      <span
+        class="text-[11px] font-semibold text-center leading-tight"
+        :class="modelValue === category.id ? 'text-[var(--color-text-dark)]' : 'text-[var(--color-text-muted)]'"
+      >
+        {{ category.label }}
+      </span>
     </button>
   </div>
 </template>

@@ -1,12 +1,13 @@
 <template>
   <div class="space-y-6">
-    <div class="flex items-center justify-between">
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
       <div>
-        <h1 class="text-2xl font-bold text-secondary-900">User Management</h1>
-        <p class="text-secondary-500 mt-1">Manage platform users and their roles</p>
+        <h1 class="font-display text-2xl font-bold text-[var(--color-text-dark)]">User Management</h1>
+        <p class="text-sm text-[var(--color-text-muted)] mt-1">Manage platform users and their roles</p>
       </div>
-      <button class="btn-primary">
-        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <button class="btn-primary text-sm inline-flex items-center">
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
         </svg>
         Invite User
@@ -14,27 +15,35 @@
     </div>
 
     <!-- Filters -->
-    <div class="card p-4">
-      <div class="flex flex-col md:flex-row gap-4">
+    <div class="bg-white rounded-2xl border border-[var(--color-border)] p-4">
+      <div class="flex flex-col md:flex-row gap-3">
         <div class="flex-1">
           <input
             v-model="searchQuery"
             type="text"
             placeholder="Search users by name or email..."
-            class="input-field"
+            class="block w-full h-10 rounded-xl border border-[var(--color-border)] bg-white px-4 text-sm text-[var(--color-text-dark)] placeholder:text-[var(--color-text-muted)] transition-all focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20"
             @input="onSearch"
           />
         </div>
-        <div class="w-full md:w-40">
-          <select v-model="roleFilter" class="input-field" @change="fetchUsers">
+        <div class="w-full md:w-36">
+          <select
+            v-model="roleFilter"
+            class="block w-full h-10 rounded-xl border border-[var(--color-border)] bg-white px-3 text-sm text-[var(--color-text-dark)] transition-all focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20"
+            @change="fetchUsers"
+          >
             <option value="">All Roles</option>
             <option value="ADMIN">Admin</option>
             <option value="DONOR">Donor</option>
             <option value="RECEIVER">Receiver</option>
           </select>
         </div>
-        <div class="w-full md:w-40">
-          <select v-model="statusFilter" class="input-field" @change="fetchUsers">
+        <div class="w-full md:w-36">
+          <select
+            v-model="statusFilter"
+            class="block w-full h-10 rounded-xl border border-[var(--color-border)] bg-white px-3 text-sm text-[var(--color-text-dark)] transition-all focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20"
+            @change="fetchUsers"
+          >
             <option value="">All Status</option>
             <option value="active">Active</option>
             <option value="inactive">Inactive</option>
@@ -45,35 +54,38 @@
     </div>
 
     <!-- Users Table -->
-    <div class="card overflow-hidden">
+    <div class="bg-white rounded-2xl border border-[var(--color-border)] overflow-hidden">
       <div class="overflow-x-auto">
-        <table class="min-w-full divide-y divide-secondary-200">
-          <thead class="bg-secondary-50">
-            <tr>
-              <th class="px-6 py-3 text-left text-xs font-medium text-secondary-500 uppercase tracking-wider">User</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-secondary-500 uppercase tracking-wider">Role</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-secondary-500 uppercase tracking-wider">Status</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-secondary-500 uppercase tracking-wider">Joined</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-secondary-500 uppercase tracking-wider">Actions</th>
+        <table class="min-w-full divide-y divide-[var(--color-border)]">
+          <thead>
+            <tr class="bg-[var(--color-bg-warm)]">
+              <th class="px-6 py-3 text-left text-[11px] font-semibold text-[var(--color-text-muted)] uppercase tracking-wider">User</th>
+              <th class="px-6 py-3 text-left text-[11px] font-semibold text-[var(--color-text-muted)] uppercase tracking-wider">Role</th>
+              <th class="px-6 py-3 text-left text-[11px] font-semibold text-[var(--color-text-muted)] uppercase tracking-wider">Status</th>
+              <th class="px-6 py-3 text-left text-[11px] font-semibold text-[var(--color-text-muted)] uppercase tracking-wider">Joined</th>
+              <th class="px-6 py-3 text-left text-[11px] font-semibold text-[var(--color-text-muted)] uppercase tracking-wider">Actions</th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-secondary-200">
+          <tbody class="divide-y divide-[var(--color-border)]">
             <tr v-if="loading">
               <td colspan="5" class="px-6 py-12 text-center">
-                <LoadingSpinner size="lg" text="Loading users..." />
+                <div class="w-6 h-6 border-2 border-[var(--color-primary)] border-t-transparent rounded-full animate-spin mx-auto" />
               </td>
-            </tr>                <tr v-else-if="paginatedUsers.length === 0">
-              <td colspan="5" class="px-6 py-12 text-center text-secondary-500">
+            </tr>
+            <tr v-else-if="paginatedUsers.length === 0">
+              <td colspan="5" class="px-6 py-12 text-center text-sm text-[var(--color-text-muted)]">
                 No users found
               </td>
             </tr>
-            <tr v-for="user in paginatedUsers" :key="user.id" class="hover:bg-secondary-50 transition-colors">
+            <tr v-for="user in paginatedUsers" :key="user.id" class="hover:bg-[var(--color-bg-warm)]/50 transition-colors">
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="flex items-center">
-                  <img :src="user.avatar || generateAvatarUrl(user.name)" class="w-8 h-8 rounded-full mr-3" />
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-full bg-[var(--color-primary)]/15 flex items-center justify-center text-xs font-bold text-[var(--color-primary)] flex-shrink-0">
+                    {{ (user.name || '?').charAt(0) }}
+                  </div>
                   <div>
-                    <div class="text-sm font-medium text-secondary-900">{{ user.name }}</div>
-                    <div class="text-sm text-secondary-500">{{ user.email }}</div>
+                    <div class="text-sm font-medium text-[var(--color-text-dark)]">{{ user.name }}</div>
+                    <div class="text-xs text-[var(--color-text-muted)]">{{ user.email }}</div>
                   </div>
                 </div>
               </td>
@@ -81,22 +93,24 @@
                 <RoleBadge :role="user.role" />
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <span :class="[
-                  'px-2 py-1 text-xs rounded-full font-medium',
-                  user.active ? 'bg-green-100 text-green-800' : 
-                  user.locked ? 'bg-red-100 text-red-800' : 'bg-yellow-100 text-yellow-800'
-                ]">
+                <span
+                  :class="[
+                    'px-2.5 py-0.5 text-[11px] font-semibold rounded-full',
+                    user.active ? 'bg-[var(--color-secondary)]/10 text-[var(--color-secondary)]' :
+                    user.locked ? 'bg-[var(--color-urgent)]/10 text-[var(--color-urgent)]' : 'bg-[var(--color-primary)]/12 text-[#A6732A]'
+                  ]"
+                >
                   {{ user.active ? 'Active' : user.locked ? 'Locked' : 'Inactive' }}
                 </span>
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-secondary-500">
-                {{ formatDate(user.createdAt) }}
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-[var(--color-text-muted)]">
+                {{ user.createdAt }}
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="flex items-center space-x-2">
-                  <button 
+                <div class="flex items-center gap-1">
+                  <button
                     @click="toggleUserStatus(user)"
-                    class="p-1.5 text-secondary-400 hover:text-primary-600 rounded-lg hover:bg-secondary-100 transition-colors"
+                    class="p-1.5 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary)]/8 transition-all"
                     :title="user.active ? 'Deactivate' : 'Activate'"
                   >
                     <svg v-if="user.active" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -107,18 +121,18 @@
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                     </svg>
                   </button>
-                  <button 
+                  <button
                     @click="editUser(user)"
-                    class="p-1.5 text-secondary-400 hover:text-primary-600 rounded-lg hover:bg-secondary-100 transition-colors"
+                    class="p-1.5 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary)]/8 transition-all"
                     title="Edit user"
                   >
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                     </svg>
                   </button>
-                  <button 
+                  <button
                     @click="confirmDeleteUser(user)"
-                    class="p-1.5 text-secondary-400 hover:text-red-600 rounded-lg hover:bg-red-50 transition-colors"
+                    class="p-1.5 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-urgent)] hover:bg-[var(--color-urgent)]/8 transition-all"
                     title="Delete user"
                   >
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -135,26 +149,26 @@
 
     <!-- Pagination -->
     <div v-if="totalPages > 1" class="flex items-center justify-between">
-      <p class="text-sm text-secondary-500">
-        Showing {{ (currentPage - 1) * perPage + 1 }} to {{ Math.min(currentPage * perPage, totalUsers) }} of {{ totalUsers }} users
+      <p class="text-sm text-[var(--color-text-muted)]">
+        Showing {{ (currentPage - 1) * perPage + 1 }}–{{ Math.min(currentPage * perPage, totalUsers) }} of {{ totalUsers }}
       </p>
-      <div class="flex items-center space-x-2">
-        <button 
+      <div class="flex items-center gap-2">
+        <button
           @click="changePage(currentPage - 1)"
           :disabled="currentPage === 1"
-          class="p-2 rounded-lg border border-secondary-300 hover:bg-secondary-50 disabled:opacity-50 transition-colors"
+          class="p-2 rounded-xl border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text-dark)] hover:bg-[var(--color-bg-warm)] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
         >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
           </svg>
         </button>
-        <span class="text-sm text-secondary-600 px-2">{{ currentPage }} / {{ totalPages }}</span>
-        <button 
+        <span class="text-sm text-[var(--color-text-muted)] px-1">{{ currentPage }} / {{ totalPages }}</span>
+        <button
           @click="changePage(currentPage + 1)"
           :disabled="currentPage === totalPages"
-          class="p-2 rounded-lg border border-secondary-300 hover:bg-secondary-50 disabled:opacity-50 transition-colors"
+          class="p-2 rounded-xl border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text-dark)] hover:bg-[var(--color-bg-warm)] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
         >
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
           </svg>
         </button>
@@ -166,8 +180,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import RoleBadge from '@/components/RoleBadge.vue'
-import LoadingSpinner from '@/components/common/LoadingSpinner.vue'
-import { formatDate, generateAvatarUrl, debounce } from '@/utils/helpers'
+import { debounce } from '@/utils/helpers'
 
 const searchQuery = ref('')
 const roleFilter = ref('')
@@ -176,12 +189,10 @@ const currentPage = ref(1)
 const perPage = ref(10)
 const loading = ref(false)
 
-// Mock data for demonstration
 const users = ref([])
 
 onMounted(() => {
   loading.value = true
-  // Simulate API call
   setTimeout(() => {
     users.value = [
       { id: 1, name: 'Sarah Johnson', email: 'sarah@example.com', role: 'ADMIN', active: true, locked: false, createdAt: '2024-01-15' },
@@ -199,18 +210,11 @@ onMounted(() => {
 
 const filteredUsers = computed(() => {
   let result = [...users.value]
-  
   if (searchQuery.value) {
     const q = searchQuery.value.toLowerCase()
-    result = result.filter(u => 
-      u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q)
-    )
+    result = result.filter(u => u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q))
   }
-  
-  if (roleFilter.value) {
-    result = result.filter(u => u.role === roleFilter.value)
-  }
-  
+  if (roleFilter.value) result = result.filter(u => u.role === roleFilter.value)
   if (statusFilter.value) {
     result = result.filter(u => {
       if (statusFilter.value === 'active') return u.active
@@ -219,43 +223,25 @@ const filteredUsers = computed(() => {
       return true
     })
   }
-  
   return result
 })
 
 const paginatedUsers = computed(() => {
   const start = (currentPage.value - 1) * perPage.value
-  const end = start + perPage.value
-  return filteredUsers.value.slice(start, end)
+  return filteredUsers.value.slice(start, start + perPage.value)
 })
 
 const totalUsers = computed(() => filteredUsers.value.length)
 const totalPages = computed(() => Math.ceil(totalUsers.value / perPage.value))
 
-const onSearch = debounce(() => {
-  currentPage.value = 1
-}, 300)
+const onSearch = debounce(() => { currentPage.value = 1 }, 300)
 
-function fetchUsers() {
-  currentPage.value = 1
-}
-
-function changePage(page) {
-  if (page < 1 || page > totalPages.value) return
-  currentPage.value = page
-}
-
-function toggleUserStatus(user) {
-  user.active = !user.active
-}
-
-function editUser(user) {
-  // Navigate to edit user page or open modal
-  console.log('Edit user:', user.id)
-}
-
+function fetchUsers() { currentPage.value = 1 }
+function changePage(page) { if (page >= 1 && page <= totalPages.value) currentPage.value = page }
+function toggleUserStatus(user) { user.active = !user.active }
+function editUser(user) { console.log('Edit user:', user.id) }
 function confirmDeleteUser(user) {
-  if (confirm(`Are you sure you want to delete ${user.name}?`)) {
+  if (confirm(`Delete ${user.name}?`)) {
     users.value = users.value.filter(u => u.id !== user.id)
   }
 }
