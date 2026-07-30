@@ -1,5 +1,5 @@
 <template>
-  <div ref="mapContainer" class="w-full h-full relative z-0"></div>
+  <div ref="mapContainer" class="w-full h-full relative z-0 rounded-2xl border border-[var(--color-border)] overflow-hidden"></div>
 </template>
 
 <script setup>

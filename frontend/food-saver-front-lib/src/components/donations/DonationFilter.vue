@@ -1,27 +1,27 @@
 <template>
-  <div class="card p-4">
-    <div class="flex flex-col md:flex-row gap-4">
+  <div class="bg-white rounded-2xl border border-[var(--color-border)] p-4">
+    <div class="flex flex-col md:flex-row gap-3">
       <!-- Search -->
       <div class="flex-1">
         <div class="relative">
-          <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-secondary-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--color-text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
           <input
             v-model="localFilters.search"
             type="text"
             placeholder="Search donations..."
-            class="input-field pl-10"
+            class="block w-full h-10 rounded-xl border border-[var(--color-border)] bg-white pl-10 pr-4 text-sm text-[var(--color-text-dark)] placeholder:text-[var(--color-text-muted)] transition-all focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20"
             @input="onSearchInput"
           />
         </div>
       </div>
 
       <!-- Category Filter -->
-      <div class="w-full md:w-48">
+      <div class="w-full md:w-44">
         <select
           v-model="localFilters.category"
-          class="input-field"
+          class="block w-full h-10 rounded-xl border border-[var(--color-border)] bg-white px-3 text-sm text-[var(--color-text-dark)] transition-all focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20"
           @change="emitFilters"
         >
           <option value="">All Categories</option>
@@ -32,10 +32,10 @@
       </div>
 
       <!-- Status Filter -->
-      <div class="w-full md:w-40">
+      <div class="w-full md:w-36">
         <select
           v-model="localFilters.status"
-          class="input-field"
+          class="block w-full h-10 rounded-xl border border-[var(--color-border)] bg-white px-3 text-sm text-[var(--color-text-dark)] transition-all focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20"
           @change="emitFilters"
         >
           <option value="">All Status</option>
@@ -46,10 +46,10 @@
       </div>
 
       <!-- Distance Filter -->
-      <div class="w-full md:w-40">
+      <div class="w-full md:w-36">
         <select
           v-model="localFilters.distance"
-          class="input-field"
+          class="block w-full h-10 rounded-xl border border-[var(--color-border)] bg-white px-3 text-sm text-[var(--color-text-dark)] transition-all focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20"
           @change="emitFilters"
         >
           <option :value="5">Within 5 km</option>
@@ -60,12 +60,12 @@
         </select>
       </div>
 
-      <!-- Clear Button -->
+      <!-- Clear -->
       <button
         @click="clearFilters"
-        class="btn-secondary whitespace-nowrap"
+        class="btn-outline h-10 text-xs whitespace-nowrap"
       >
-        Clear Filters
+        Clear
       </button>
     </div>
   </div>

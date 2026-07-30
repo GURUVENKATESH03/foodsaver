@@ -7,16 +7,16 @@ export const authService = {
   },
 
   async register(userData) {
-    const response = await api.post('/auth/register', userData)
+    const response = await api.post('/auth/signup', userData)
     return response.data
   },
 
-  async logout() {
-    await api.post('/auth/logout')
+  async logout(refreshToken) {
+    await api.post('/auth/logout', { refreshToken })
   },
 
   async getCurrentUser() {
-    const response = await api.get('/auth/me')
+    const response = await api.get('/profile')
     return response.data
   },
 
@@ -26,12 +26,12 @@ export const authService = {
   },
 
   async updateProfile(data) {
-    const response = await api.patch('/auth/profile', data)
+    const response = await api.put('/profile', data)
     return response.data
   },
 
   async changePassword(data) {
-    const response = await api.post('/auth/change-password', data)
+    const response = await api.patch('/profile/password', data)
     return response.data
   }
 }

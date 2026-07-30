@@ -224,16 +224,14 @@ public class AuthService {
 
         // Determine role from request, default to USER
         String roleName = request.getRole();
-        if (roleName == null || roleName.isBlank()) {
-            roleName = "USER";
-        }
+        String resolvedRole = (roleName == null || roleName.isBlank()) ? "USER" : roleName;
 
         // Get or create role
-        RoleEntity userRole = roleRepo.findByRoleName(roleName)
+        RoleEntity userRole = roleRepo.findByRoleName(resolvedRole)
             .orElseGet(() -> {
                 RoleEntity newRole = new RoleEntity();
-                newRole.setRoleName(roleName);
-                newRole.setRoleDescription(roleName + " role");
+                newRole.setRoleName(resolvedRole);
+                newRole.setRoleDescription(resolvedRole + " role");
                 return roleRepo.save(newRole);
             });
 

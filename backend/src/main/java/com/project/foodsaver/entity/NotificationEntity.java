@@ -43,6 +43,9 @@ public class NotificationEntity {
     @Column(name = "is_read")
     private Boolean isRead = false;
 
+    @Column(name = "link")
+    private String link;
+
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 

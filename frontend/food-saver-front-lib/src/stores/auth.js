@@ -74,7 +74,13 @@ export const useAuthStore = defineStore('auth', () => {
     try {
       const response = await authService.login(credentials)
       setTokens(response.accessToken, response.refreshToken)
-      user.value = response.user
+      // Build user object from flat response fields (the API returns email/fullName/role, not a nested user object)
+      user.value = response.user || {
+        email: response.email,
+        fullName: response.fullName,
+        name: response.fullName,
+        role: response.role
+      }
       return { success: true }
     } catch (error) {
       return { 
@@ -89,9 +95,17 @@ export const useAuthStore = defineStore('auth', () => {
   async function register(userData) {
     loading.value = true
     try {
-      const response = await authService.register(userData)
-      setTokens(response.accessToken, response.refreshToken)
-      user.value = response.user
+      const res = await authService.register(userData)
+      // The signup endpoint wraps the response in { data: { ... } } — unwrap it
+      const data = res.data || res
+      setTokens(data.accessToken, data.refreshToken)
+      // Build user object from flat response fields
+      user.value = data.user || {
+        email: data.email,
+        fullName: data.fullName,
+        name: data.fullName,
+        role: data.role
+      }
       return { success: true }
     } catch (error) {
       return { 
