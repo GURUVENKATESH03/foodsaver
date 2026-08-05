@@ -100,11 +100,10 @@
 
       <!-- Nearby cards -->
       <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <DonationCard
+        <FoodCard
           v-for="donation in nearbyDonations"
           :key="donation.id"
           :donation="donation"
-          :show-request="true"
           @request="handleRequest"
         />
       </div>
@@ -139,7 +138,7 @@
 import { ref, onMounted } from 'vue'
 import { donationService } from '@/services/donation.service'
 import { useGeolocation } from '@/composables/useGeolocation'
-import DonationCard from '@/components/donations/DonationCard.vue'
+import FoodCard from '@/components/donations/FoodCard.vue'
 import DonationStatusBadge from '@/components/donations/DonationStatusBadge.vue'
 
 const availableCount = ref(0)

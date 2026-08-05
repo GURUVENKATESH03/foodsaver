@@ -3,12 +3,12 @@
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
       <div>
-        <h1 class="font-display text-2xl font-bold text-[var(--color-text-dark)]">Food Map</h1>
-        <p class="text-sm text-[var(--color-text-muted)] mt-1">Find available donations near you</p>
+        <h1 class="font-display text-3xl font-bold text-[var(--color-text-dark)]">Food Map</h1>
+        <p class="text-sm text-[var(--color-text-muted)] mt-1 font-body">Find available food donations near you on the live map</p>
       </div>
       <button
         @click="locateAndRefresh"
-        class="btn-outline text-sm inline-flex items-center"
+        class="btn-outline text-sm inline-flex items-center font-body"
         :disabled="locating"
       >
         <svg
@@ -28,7 +28,7 @@
     </div>
 
     <!-- Map Container -->
-    <div class="bg-white rounded-2xl border border-[var(--color-border)] overflow-hidden">
+    <div class="neu-card overflow-hidden">
       <div ref="mapContainer" class="h-[500px] w-full relative z-0"></div>
     </div>
 
@@ -38,13 +38,12 @@
     </div>
 
     <div v-else-if="nearbyDonations.length > 0" class="space-y-4">
-      <h3 class="font-display text-lg font-bold text-[var(--color-text-dark)]">Nearby Donations</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <DonationCard
+      <h3 class="font-display text-xl font-bold text-[var(--color-text-dark)]">Nearby Donations</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <FoodCard
           v-for="donation in nearbyDonations"
           :key="donation.id"
           :donation="donation"
-          :show-request="true"
           @request="handleRequest"
         />
       </div>
@@ -58,7 +57,7 @@ import { donationService } from '@/services/donation.service'
 import { useGeolocation } from '@/composables/useGeolocation'
 import { useMap } from '@/composables/useMap'
 import L from 'leaflet'
-import DonationCard from '@/components/donations/DonationCard.vue'
+import FoodCard from '@/components/donations/FoodCard.vue'
 
 const mapContainer = ref(null)
 const locating = ref(false)
@@ -71,7 +70,6 @@ const nearbyDonations = ref([])
 const userMarker = ref(null)
 
 onMounted(async () => {
-  // Auto-locate and load nearby donations on mount
   await locateAndRefresh()
 })
 
@@ -80,33 +78,29 @@ async function locateAndRefresh() {
   nearbyLoading.value = true
 
   try {
-    // 1. Get user's real-time location
     const coords = await locateUser()
 
-    // 2. Place a user marker on the map
     clearMarkers()
     setView(coords.lat, coords.lng, 13)
 
     const userIcon = L.divIcon({
-      html: '<div style="width:20px;height:20px;background:#E29B3E;border:3px solid white;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.3)"></div>',
+      html: '<div style="width:22px;height:22px;background:#0D9488;border:3px solid white;border-radius:50%;box-shadow:0 3px 8px rgba(0,0,0,0.3)"></div>',
       className: '',
-      iconSize: [20, 20],
-      iconAnchor: [10, 10]
+      iconSize: [22, 22],
+      iconAnchor: [11, 11]
     })
     userMarker.value = addMarker(coords.lat, coords.lng, '<b>You are here</b>', { icon: userIcon })
 
-    // 3. Fetch donations within 10km radius
     const data = await donationService.getNearby(coords.lat, coords.lng, 10)
     nearbyDonations.value = Array.isArray(data) ? data : data?.data || []
 
-    // 4. Add markers for each donation
     nearbyDonations.value.forEach(donation => {
       if (donation.latitude && donation.longitude) {
         const popup = `
           <div style="padding:8px;font-family:system-ui,sans-serif">
-            <h3 style="font-weight:600;margin:0 0 4px">${donation.title}</h3>
-            <p style="font-size:13px;margin:0 0 4px;color:#8B7D6E">${donation.quantity || ''} ${donation.quantityUnit || ''}${donation.distance ? ` · ${donation.distance}km` : ''}</p>
-            <a href="/donations/${donation.id}" style="color:#E29B3E;font-size:13px;font-weight:500">View Details →</a>
+            <h3 style="font-weight:700;margin:0 0 4px">${donation.title}</h3>
+            <p style="font-size:13px;margin:0 0 6px;color:#64748B">${donation.quantity || ''} ${donation.quantityUnit || ''}${donation.distance ? ` · ${donation.distance}km` : ''}</p>
+            <a href="/donations/${donation.id}" style="color:#0D9488;font-size:13px;font-weight:600">View Details →</a>
           </div>
         `
         addMarker(donation.latitude, donation.longitude, popup)

@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-[var(--color-bg-warm)] flex">
+  <div class="min-h-screen bg-[var(--color-bg)] flex">
     <!-- Sidebar -->
     <AppbarSidebar
       :is-open="sidebarOpen"
@@ -9,13 +9,13 @@
     <!-- Main Content -->
     <div class="flex-1 flex flex-col min-w-0 transition-all duration-300 lg:ml-64">
       <!-- Top Header Bar -->
-      <header class="bg-white border-b border-[var(--color-border)] sticky top-0 z-20">
-        <div class="flex items-center justify-between px-4 py-3 lg:px-8">
+      <header class="bg-white/90 backdrop-blur-md border-b border-[var(--color-border)] sticky top-0 z-20">
+        <div class="flex items-center justify-between px-4 py-3.5 lg:px-8">
           <!-- Left: mobile hamburger + breadcrumb -->
           <div class="flex items-center gap-4">
             <button
               @click="sidebarOpen = !sidebarOpen"
-              class="lg:hidden p-2 rounded-xl text-[var(--color-text-muted)] hover:text-[var(--color-text-dark)] hover:bg-[var(--color-bg-warm)] transition-all"
+              class="lg:hidden p-2 rounded-xl text-[var(--color-text-muted)] hover:text-[var(--color-text-dark)] hover:bg-[var(--color-bg)] transition-all"
               aria-label="Toggle sidebar"
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -23,7 +23,7 @@
               </svg>
             </button>
             <div class="hidden sm:flex items-center gap-2 text-sm text-[var(--color-text-muted)]">
-              <span class="font-medium text-[var(--color-text-dark)]">{{ pageTitle }}</span>
+              <span class="font-display font-bold text-base text-[var(--color-text-dark)]">{{ pageTitle }}</span>
             </div>
           </div>
 
@@ -32,12 +32,12 @@
             <NotificationDropdown />
 
             <div class="flex items-center gap-3 pl-4 border-l border-[var(--color-border)]">
-              <div class="w-8 h-8 rounded-full bg-[var(--color-primary)]/15 flex items-center justify-center text-sm font-bold text-[var(--color-primary)]">
+              <div class="w-9 h-9 rounded-xl bg-[var(--color-primary)] text-white flex items-center justify-center text-sm font-bold shadow-[var(--shadow-neu-sm)]">
                 {{ userInitial }}
               </div>
               <div class="hidden md:block">
-                <p class="text-sm font-medium text-[var(--color-text-dark)]">{{ user?.name || 'User' }}</p>
-                <p class="text-[11px] text-[var(--color-text-muted)] capitalize">{{ userRole || 'Guest' }}</p>
+                <p class="text-sm font-semibold text-[var(--color-text-dark)]">{{ user?.name || 'User' }}</p>
+                <p class="text-[11px] text-[var(--color-text-muted)] capitalize font-mono">{{ userRole || 'Guest' }}</p>
               </div>
             </div>
           </div>
@@ -53,7 +53,7 @@
     <!-- Mobile Sidebar Overlay -->
     <div
       v-if="sidebarOpen"
-      class="fixed inset-0 bg-black/30 backdrop-blur-sm z-20 lg:hidden"
+      class="fixed inset-0 bg-black/40 backdrop-blur-sm z-20 lg:hidden"
       @click="sidebarOpen = false"
     />
   </div>

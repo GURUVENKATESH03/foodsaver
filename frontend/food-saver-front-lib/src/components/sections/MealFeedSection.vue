@@ -1,20 +1,20 @@
 <template>
-  <section class="bg-[var(--color-bg-deep)] section-padding">
-    <div class="container-wide">
+  <section class="bg-[var(--color-bg)] py-20 md:py-28 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
         <div>
-          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--color-primary)]/15 text-xs font-semibold text-[var(--color-primary)] tracking-wider uppercase mb-4">
-            Live feed
+          <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[var(--color-primary)]/10 text-xs font-semibold text-[var(--color-primary)] tracking-wider uppercase mb-4 font-mono">
+            Live Feed
           </span>
-          <h2 class="font-display text-3xl sm:text-4xl font-bold text-[var(--color-text-light)] tracking-tight">
+          <h2 class="font-display text-3xl sm:text-4xl font-bold text-[var(--color-text-dark)] tracking-tight">
             Available near you
           </h2>
-          <p class="mt-2 text-sm text-[var(--color-text-light-muted)]">
-            Sample data — {{ filteredMeals.length }} meals shown
+          <p class="mt-2 text-sm text-[var(--color-text-muted)] font-body">
+            Showing {{ filteredMeals.length }} meals within your community
           </p>
         </div>
 
-        <router-link to="/donations" class="text-sm font-semibold text-[var(--color-primary)] hover:text-[var(--color-primary-hover)] transition-colors inline-flex items-center gap-1.5">
+        <router-link to="/donations" class="text-sm font-semibold text-[var(--color-primary)] hover:underline inline-flex items-center gap-1.5 font-body">
           View all meals
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M5 12h14" />
@@ -28,22 +28,21 @@
         <MealFilterBar @filter="onFilter" />
       </div>
 
-      <!-- Meal grid — intentionally loose, not rigid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" style="grid-auto-rows: min-content;">
+      <!-- Meal grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
         <MealCard
-          v-for="(meal, i) in filteredMeals"
+          v-for="meal in filteredMeals"
           :key="meal.id"
           :meal="meal"
-          :style="{ marginTop: (i % 3 === 1 ? '12px' : i % 3 === 2 ? '6px' : '0') }"
         />
       </div>
 
       <!-- Empty state -->
-      <div v-if="filteredMeals.length === 0" class="text-center py-16">
+      <div v-if="filteredMeals.length === 0" class="neu-card text-center py-16 px-6 max-w-md mx-auto my-10">
         <div class="text-4xl mb-4">🍲</div>
-        <h3 class="font-display text-xl font-bold text-[var(--color-text-light)] mb-2">No meals match your filters</h3>
-        <p class="text-sm text-[var(--color-text-light-muted)] mb-6">Try adjusting your search or distance.</p>
-        <button @click="resetFilters" class="btn-outline border-[var(--color-border-deep)] text-[var(--color-text-light)] hover:bg-white/5 text-sm">
+        <h3 class="font-display text-xl font-bold text-[var(--color-text-dark)] mb-2">No meals match your filters</h3>
+        <p class="text-sm text-[var(--color-text-muted)] mb-6 font-body">Try adjusting your search query, dietary preferences, or distance filter.</p>
+        <button @click="resetFilters" class="btn-outline text-sm">
           Reset filters
         </button>
       </div>

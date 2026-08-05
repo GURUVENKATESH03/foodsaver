@@ -1,8 +1,8 @@
 <template>
   <span
     :class="[
-      'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold capitalize',
-      roleClasses[role] || 'bg-[var(--color-bg-warm)] text-[var(--color-text-muted)]'
+      'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold font-mono capitalize',
+      roleClasses[role] || 'bg-slate-200 text-slate-600'
     ]"
   >
     {{ role?.toLowerCase() }}
@@ -19,8 +19,8 @@ defineProps({
 })
 
 const roleClasses = {
-  ADMIN: 'bg-purple-50 text-purple-700',
-  DONOR: 'bg-[var(--color-primary)]/12 text-[var(--color-primary)]',
-  RECEIVER: 'bg-[var(--color-secondary)]/10 text-[var(--color-secondary)]'
+  ADMIN: 'bg-purple-500/10 text-purple-600 border border-purple-500/20',
+  DONOR: 'bg-[var(--color-primary)]/10 text-[var(--color-primary)] border border-[var(--color-primary)]/20',
+  RECEIVER: 'bg-emerald-500/10 text-emerald-600 border border-emerald-500/20'
 }
 </script>

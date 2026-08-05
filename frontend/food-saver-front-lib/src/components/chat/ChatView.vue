@@ -1,9 +1,9 @@
 <template>
-  <div class="h-[calc(100vh-10rem)] bg-white rounded-2xl border border-[var(--color-border)] overflow-hidden flex">
+  <div class="h-[calc(100vh-10rem)] neu-card overflow-hidden flex">
     <!-- Conversations Sidebar -->
-    <div class="w-80 border-r border-[var(--color-border)] flex flex-col bg-[var(--color-bg-warm)] flex-shrink-0">
-      <div class="p-4 border-b border-[var(--color-border)]">
-        <h2 class="font-display text-lg font-bold text-[var(--color-text-dark)]">Messages</h2>
+    <div class="w-80 border-r border-slate-200 flex flex-col bg-slate-100/60 flex-shrink-0">
+      <div class="p-4 border-b border-slate-200">
+        <h2 class="font-display text-xl font-bold text-[var(--color-text-dark)]">Messages</h2>
       </div>
       <div class="flex-1 overflow-y-auto">
         <ConversationList
@@ -15,32 +15,31 @@
     </div>
 
     <!-- Chat Area -->
-    <div class="flex-1 flex flex-col">
-      <div v-if="!activeConversation" class="flex-1 flex items-center justify-center">
-        <div class="text-center">
-          <div class="w-16 h-16 rounded-2xl bg-[var(--color-bg-warm)] border border-[var(--color-border)] flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-[var(--color-text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-            </svg>
+    <div class="flex-1 flex flex-col bg-white">
+      <div v-if="!activeConversation" class="flex-1 flex items-center justify-center bg-[var(--color-bg)]">
+        <div class="text-center p-8 neu-card max-w-sm">
+          <div class="w-16 h-16 rounded-2xl bg-white flex items-center justify-center mx-auto mb-4 text-3xl shadow-[var(--shadow-neu-sm)]">
+            💬
           </div>
-          <p class="text-sm text-[var(--color-text-muted)]">Select a conversation to start messaging</p>
+          <h3 class="font-display font-bold text-lg text-[var(--color-text-dark)] mb-1">Your Inbox</h3>
+          <p class="text-sm text-[var(--color-text-muted)] font-body">Select a conversation from the sidebar to view and send messages</p>
         </div>
       </div>
 
       <template v-else>
         <!-- Header -->
-        <div class="px-6 py-4 border-b border-[var(--color-border)] flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-[var(--color-primary)]/15 flex items-center justify-center text-sm font-bold text-[var(--color-primary)]">
+        <div class="px-6 py-4 border-b border-slate-200 flex items-center gap-3 bg-white">
+          <div class="w-10 h-10 rounded-full bg-[var(--color-primary)] text-white flex items-center justify-center text-sm font-bold font-mono shadow-sm">
             {{ (activeConversation.participantName || '?').charAt(0) }}
           </div>
           <div>
-            <h3 class="text-sm font-semibold text-[var(--color-text-dark)]">{{ activeConversation.participantName }}</h3>
-            <p class="text-xs text-[var(--color-text-muted)]">{{ activeConversation.donationTitle }}</p>
+            <h3 class="text-sm font-semibold text-[var(--color-text-dark)] font-body">{{ activeConversation.participantName }}</h3>
+            <p class="text-xs text-[var(--color-text-muted)] font-mono">{{ activeConversation.donationTitle }}</p>
           </div>
         </div>
 
         <!-- Messages -->
-        <div class="flex-1 overflow-y-auto p-6 space-y-4" ref="messagesContainer">
+        <div class="flex-1 overflow-y-auto p-6 space-y-4 bg-slate-50/50" ref="messagesContainer">
           <MessageThread :messages="messages" />
         </div>
 

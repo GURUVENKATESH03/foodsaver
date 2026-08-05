@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-[var(--color-bg-warm)]">
+  <div class="min-h-screen bg-[var(--color-bg)]">
     <!-- Header -->
     <AppHeader
       :is-authenticated="isAuthenticated"
@@ -39,11 +39,11 @@
       v-if="mobileOpen"
       class="fixed inset-0 z-50 md:hidden"
     >
-      <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" @click="mobileOpen = false" />
-      <nav class="absolute top-0 left-0 bottom-0 w-72 bg-[var(--color-bg-deep)] p-8 flex flex-col gap-6 shadow-2xl">
-        <div class="flex items-center justify-between mb-6">
-          <span class="font-display text-lg font-bold text-[var(--color-text-light)]">Meal Share</span>
-          <button @click="mobileOpen = false" class="text-[var(--color-text-light-muted)] hover:text-white transition-colors">
+      <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" @click="mobileOpen = false" />
+      <nav class="absolute top-0 left-0 bottom-0 w-72 bg-[#1E293B] p-8 flex flex-col gap-6 shadow-2xl">
+        <div class="flex items-center justify-between mb-6 border-b border-slate-800 pb-4">
+          <span class="font-display text-lg font-bold text-white">Meal Share</span>
+          <button @click="mobileOpen = false" class="text-slate-400 hover:text-white transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="18" y1="6" x2="6" y2="18" />
               <line x1="6" y1="6" x2="18" y2="18" />
@@ -55,22 +55,22 @@
           v-for="link in mobileLinks"
           :key="link.path"
           :to="link.path"
-          class="text-sm font-medium text-[var(--color-text-light-muted)] hover:text-[var(--color-text-light)] transition-colors py-2"
+          class="text-sm font-medium text-slate-300 hover:text-[var(--color-primary)] transition-colors py-2"
           @click="mobileOpen = false"
         >
           {{ link.label }}
         </router-link>
 
-        <div class="mt-auto pt-6 border-t border-[var(--color-border-deep)]">
+        <div class="mt-auto pt-6 border-t border-slate-800">
           <template v-if="!isAuthenticated">
-            <router-link to="/auth/login" class="block text-sm font-medium text-[var(--color-text-light-muted)] hover:text-[var(--color-text-light)] mb-3" @click="mobileOpen = false">
+            <router-link to="/auth/login" class="block text-sm font-medium text-slate-300 hover:text-white mb-3" @click="mobileOpen = false">
               Sign in
             </router-link>
-            <router-link to="/auth/signup" class="btn-secondary text-sm w-full text-center" @click="mobileOpen = false">
+            <router-link to="/auth/signup" class="btn-primary text-sm w-full text-center" @click="mobileOpen = false">
               Get started
             </router-link>
           </template>
-          <button v-else @click="handleLogout" class="text-sm font-medium text-[var(--color-urgent)]/80 hover:text-[var(--color-urgent)] w-full text-left">
+          <button v-else @click="handleLogout" class="text-sm font-medium text-red-400 hover:text-red-300 w-full text-left">
             Sign out
           </button>
         </div>
@@ -96,7 +96,7 @@ import FinalCta from '@/components/sections/FinalCta.vue'
 const router = useRouter()
 
 const mobileOpen = ref(false)
-const isAuthenticated = ref(false) // Will wire up to auth store later
+const isAuthenticated = ref(false)
 
 const mobileLinks = [
   { path: '/', label: 'Home' },

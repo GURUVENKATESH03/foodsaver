@@ -5,15 +5,15 @@
       <h1 class="font-display text-2xl font-bold text-[var(--color-text-dark)]">
         Welcome back
       </h1>
-      <p class="mt-1.5 text-sm text-[var(--color-text-muted)]">
-        Sign in to continue sharing meals
+      <p class="mt-1.5 text-sm text-[var(--color-text-muted)] font-body">
+        Sign in to continue sharing and discovering meals
       </p>
     </div>
 
     <!-- Error message -->
     <div
       v-if="errorMessage"
-      class="mb-5 p-3 rounded-xl bg-[var(--color-urgent)]/8 border border-[var(--color-urgent)]/20 text-sm text-[var(--color-urgent)]"
+      class="mb-5 p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-xs font-semibold text-red-600 font-mono"
       role="alert"
     >
       {{ errorMessage }}
@@ -23,7 +23,7 @@
     <form @submit.prevent="handleLogin" class="space-y-5">
       <!-- Email -->
       <div class="space-y-1.5">
-        <label for="email" class="text-xs font-semibold text-[var(--color-text-dark)] tracking-wide uppercase">
+        <label for="email" class="text-xs font-semibold text-[var(--color-text-dark)] tracking-wide uppercase font-mono">
           Email address
         </label>
         <input
@@ -33,19 +33,19 @@
           required
           autocomplete="email"
           placeholder="name@example.com"
-          class="block w-full h-11 rounded-xl border border-[var(--color-border)] bg-white px-4 text-sm text-[var(--color-text-dark)] placeholder:text-[var(--color-text-muted)] transition-all focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20"
+          class="neu-input block w-full h-11 px-4 text-sm font-body"
         />
       </div>
 
       <!-- Password -->
       <div class="space-y-1.5">
         <div class="flex items-center justify-between">
-          <label for="password" class="text-xs font-semibold text-[var(--color-text-dark)] tracking-wide uppercase">
+          <label for="password" class="text-xs font-semibold text-[var(--color-text-dark)] tracking-wide uppercase font-mono">
             Password
           </label>
           <router-link
             to="/forgot-password"
-            class="text-xs font-medium text-[var(--color-secondary)] hover:text-[var(--color-secondary-hover)] transition-colors"
+            class="text-xs font-medium text-[var(--color-primary)] hover:underline font-body"
           >
             Forgot?
           </router-link>
@@ -57,19 +57,19 @@
           required
           autocomplete="current-password"
           placeholder="••••••••"
-          class="block w-full h-11 rounded-xl border border-[var(--color-border)] bg-white px-4 text-sm text-[var(--color-text-dark)] placeholder:text-[var(--color-text-muted)] transition-all focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20"
+          class="neu-input block w-full h-11 px-4 text-sm font-body"
         />
       </div>
 
       <!-- Submit -->
       <button
         type="submit"
-        class="btn-primary w-full h-11 text-sm"
+        class="btn-primary w-full h-11 text-sm font-body"
         :disabled="isLoading"
       >
         <svg
           v-if="isLoading"
-          class="animate-spin -ml-1 mr-2 h-4 w-4 text-[var(--color-text-dark)]"
+          class="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -84,10 +84,10 @@
     <!-- Divider -->
     <div class="relative my-7">
       <div class="absolute inset-0 flex items-center">
-        <div class="w-full border-t border-[var(--color-border)]" />
+        <div class="w-full border-t border-slate-300" />
       </div>
       <div class="relative flex justify-center text-xs">
-        <span class="bg-white px-3 text-[var(--color-text-muted)]">or continue with</span>
+        <span class="bg-[var(--color-surface)] px-3 text-slate-500 font-mono">or continue with</span>
       </div>
     </div>
 
@@ -95,7 +95,7 @@
     <div class="grid grid-cols-2 gap-3">
       <button
         type="button"
-        class="btn-outline h-10 text-xs justify-center"
+        class="btn-outline h-10 text-xs justify-center font-body"
         @click="socialLogin('google')"
       >
         <svg class="w-4 h-4 mr-1.5" viewBox="0 0 24 24" fill="none" stroke="none">
@@ -108,7 +108,7 @@
       </button>
       <button
         type="button"
-        class="btn-outline h-10 text-xs justify-center"
+        class="btn-outline h-10 text-xs justify-center font-body"
         @click="socialLogin('github')"
       >
         <svg class="w-4 h-4 mr-1.5" viewBox="0 0 24 24" fill="currentColor">
@@ -119,18 +119,18 @@
     </div>
 
     <!-- Sign up link -->
-    <p class="mt-7 text-center text-xs text-[var(--color-text-muted)]">
+    <p class="mt-7 text-center text-xs text-[var(--color-text-muted)] font-body">
       Don't have an account?
       <router-link
         to="/auth/signup"
-        class="font-semibold text-[var(--color-secondary)] hover:text-[var(--color-secondary-hover)] transition-colors"
+        class="font-semibold text-[var(--color-primary)] hover:underline"
       >
         Sign up
       </router-link>
     </p>
 
     <!-- Back link -->
-    <div class="mt-5 flex justify-center">
+    <div class="mt-5 flex justify-center font-body">
       <router-link
         to="/"
         class="inline-flex items-center gap-1.5 text-xs font-medium text-[var(--color-text-muted)] hover:text-[var(--color-text-dark)] transition-colors"
@@ -182,7 +182,6 @@ async function handleLogin() {
 }
 
 function socialLogin(provider) {
-  // Placeholder for OAuth integration
   console.log(`Social login with ${provider}`)
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-[var(--color-bg-warm)] flex flex-col">
+  <div class="min-h-screen bg-[var(--color-bg)] flex flex-col">
     <AppHeader
       :is-authenticated="isAuthenticated"
       @logout="handleLogout"

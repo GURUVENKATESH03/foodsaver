@@ -1,9 +1,9 @@
 <template>
-  <div class="bg-white rounded-2xl border border-[var(--color-border)] p-6 transition-all duration-200 hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-0.5">
+  <div class="neu-card p-6">
     <div class="flex items-start justify-between mb-4">
       <div
         :class="[
-          'w-12 h-12 rounded-xl flex items-center justify-center',
+          'w-12 h-12 rounded-2xl flex items-center justify-center shadow-[var(--shadow-neu-sm)]',
           bgColorClass
         ]"
       >
@@ -17,8 +17,8 @@
       <span
         v-if="trend"
         :class="[
-          'inline-flex items-center gap-0.5 text-xs font-semibold px-2 py-0.5 rounded-full',
-          trendUp ? 'bg-[var(--color-secondary)]/10 text-[var(--color-secondary)]' : 'bg-[var(--color-urgent)]/10 text-[var(--color-urgent)]'
+          'inline-flex items-center gap-0.5 text-xs font-semibold px-2.5 py-1 rounded-full font-mono',
+          trendUp ? 'bg-emerald-500/10 text-emerald-600' : 'bg-red-500/10 text-red-600'
         ]"
       >
         <svg v-if="trendUp" class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -30,8 +30,8 @@
         {{ trend }}
       </span>
     </div>
-    <p class="font-display text-3xl font-bold text-[var(--color-text-dark)]">{{ formattedValue }}</p>
-    <p class="text-sm text-[var(--color-text-muted)] mt-1">{{ title }}</p>
+    <p class="font-mono text-3xl font-bold text-[var(--color-text-dark)]">{{ formattedValue }}</p>
+    <p class="text-sm font-medium text-[var(--color-text-muted)] mt-1 font-body">{{ title }}</p>
   </div>
 </template>
 
@@ -61,11 +61,11 @@ const formattedValue = computed(() => {
 })
 
 const colorMap = {
-  primary: { bg: 'bg-[var(--color-primary)]/12', icon: 'text-[var(--color-primary)]' },
-  green: { bg: 'bg-[var(--color-secondary)]/12', icon: 'text-[var(--color-secondary)]' },
-  blue: { bg: 'bg-blue-50', icon: 'text-blue-600' },
-  orange: { bg: 'bg-[var(--color-urgent)]/8', icon: 'text-[var(--color-urgent)]' },
-  purple: { bg: 'bg-purple-50', icon: 'text-purple-600' }
+  primary: { bg: 'bg-[var(--color-primary)]/10', icon: 'text-[var(--color-primary)]' },
+  green: { bg: 'bg-emerald-500/10', icon: 'text-emerald-600' },
+  blue: { bg: 'bg-[var(--color-primary)]/10', icon: 'text-[var(--color-primary)]' },
+  orange: { bg: 'bg-amber-500/10', icon: 'text-amber-600' },
+  purple: { bg: 'bg-[var(--color-primary)]/10', icon: 'text-[var(--color-primary)]' }
 }
 
 const colorClasses = computed(() => colorMap[props.color] || colorMap.primary)

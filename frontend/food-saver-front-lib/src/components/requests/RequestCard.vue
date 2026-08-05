@@ -1,26 +1,26 @@
 <template>
-  <div class="flex items-center justify-between p-4 bg-[var(--color-bg-warm)] rounded-xl border border-[var(--color-border)] hover:bg-[var(--color-bg-warm)]/70 transition-colors">
+  <div class="neu-card p-4 flex items-center justify-between">
     <div class="flex items-center gap-3 min-w-0">
-      <div class="w-10 h-10 rounded-full bg-[var(--color-primary)]/15 flex items-center justify-center text-sm font-bold text-[var(--color-primary)] flex-shrink-0">
+      <div class="w-10 h-10 rounded-full bg-[var(--color-primary)] text-white flex items-center justify-center text-sm font-bold font-mono shadow-sm flex-shrink-0">
         {{ (request.requesterName || '?').charAt(0) }}
       </div>
       <div class="min-w-0">
-        <p class="text-sm font-semibold text-[var(--color-text-dark)] truncate">{{ request.requesterName }}</p>
-        <p class="text-xs text-[var(--color-text-muted)] truncate">{{ request.message || 'No message' }}</p>
-        <p class="text-[11px] text-[var(--color-text-muted)] mt-0.5 font-mono">{{ timeAgo }}</p>
+        <p class="text-sm font-semibold text-[var(--color-text-dark)] font-body truncate">{{ request.requesterName }}</p>
+        <p class="text-xs text-[var(--color-text-muted)] font-body truncate">{{ request.message || 'No message provided' }}</p>
+        <p class="text-[11px] text-slate-400 mt-0.5 font-mono">{{ timeAgo }}</p>
       </div>
     </div>
 
     <div class="flex items-center gap-2 flex-shrink-0">
       <button
         @click="$emit('approve', request.id)"
-        class="px-3 py-1.5 bg-[var(--color-secondary)]/10 text-[var(--color-secondary)] rounded-lg text-xs font-semibold hover:bg-[var(--color-secondary)]/20 transition-colors"
+        class="px-3 py-1.5 bg-emerald-500/10 text-emerald-600 rounded-xl text-xs font-semibold hover:bg-emerald-500/20 transition-colors font-body"
       >
         Approve
       </button>
       <button
         @click="$emit('reject', request.id)"
-        class="px-3 py-1.5 bg-[var(--color-urgent)]/8 text-[var(--color-urgent)] rounded-lg text-xs font-semibold hover:bg-[var(--color-urgent)]/15 transition-colors"
+        class="px-3 py-1.5 bg-red-500/10 text-red-600 rounded-xl text-xs font-semibold hover:bg-red-500/20 transition-colors font-body"
       >
         Reject
       </button>

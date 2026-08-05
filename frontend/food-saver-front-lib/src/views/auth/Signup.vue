@@ -5,15 +5,15 @@
       <h1 class="font-display text-2xl font-bold text-[var(--color-text-dark)]">
         Create your account
       </h1>
-      <p class="mt-1.5 text-sm text-[var(--color-text-muted)]">
-        Join Meal Share and help reduce food waste
+      <p class="mt-1.5 text-sm text-[var(--color-text-muted)] font-body">
+        Join Meal Share and help reduce food waste in your community
       </p>
     </div>
 
     <!-- Error message -->
     <div
       v-if="errorMessage"
-      class="mb-5 p-3 rounded-xl bg-[var(--color-urgent)]/8 border border-[var(--color-urgent)]/20 text-sm text-[var(--color-urgent)]"
+      class="mb-5 p-3 rounded-xl bg-red-500/10 border border-red-500/20 text-xs font-semibold text-red-600 font-mono"
       role="alert"
     >
       {{ errorMessage }}
@@ -23,7 +23,7 @@
     <form @submit.prevent="handleSignup" class="space-y-5">
       <!-- Full name -->
       <div class="space-y-1.5">
-        <label for="name" class="text-xs font-semibold text-[var(--color-text-dark)] tracking-wide uppercase">
+        <label for="name" class="text-xs font-semibold text-[var(--color-text-dark)] tracking-wide uppercase font-mono">
           Full name
         </label>
         <input
@@ -32,13 +32,13 @@
           type="text"
           required
           placeholder="Alex Carter"
-          class="block w-full h-11 rounded-xl border border-[var(--color-border)] bg-white px-4 text-sm text-[var(--color-text-dark)] placeholder:text-[var(--color-text-muted)] transition-all focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20"
+          class="neu-input block w-full h-11 px-4 text-sm font-body"
         />
       </div>
 
       <!-- Email -->
       <div class="space-y-1.5">
-        <label for="email" class="text-xs font-semibold text-[var(--color-text-dark)] tracking-wide uppercase">
+        <label for="email" class="text-xs font-semibold text-[var(--color-text-dark)] tracking-wide uppercase font-mono">
           Email address
         </label>
         <input
@@ -48,13 +48,13 @@
           required
           autocomplete="email"
           placeholder="name@example.com"
-          class="block w-full h-11 rounded-xl border border-[var(--color-border)] bg-white px-4 text-sm text-[var(--color-text-dark)] placeholder:text-[var(--color-text-muted)] transition-all focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20"
+          class="neu-input block w-full h-11 px-4 text-sm font-body"
         />
       </div>
 
       <!-- Password -->
       <div class="space-y-1.5">
-        <label for="password" class="text-xs font-semibold text-[var(--color-text-dark)] tracking-wide uppercase">
+        <label for="password" class="text-xs font-semibold text-[var(--color-text-dark)] tracking-wide uppercase font-mono">
           Password
         </label>
         <input
@@ -64,43 +64,43 @@
           required
           autocomplete="new-password"
           placeholder="Create a secure password"
-          class="block w-full h-11 rounded-xl border border-[var(--color-border)] bg-white px-4 text-sm text-[var(--color-text-dark)] placeholder:text-[var(--color-text-muted)] transition-all focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20"
+          class="neu-input block w-full h-11 px-4 text-sm font-body"
         />
       </div>
 
       <!-- Role selection -->
       <div class="space-y-2">
-        <label class="text-xs font-semibold text-[var(--color-text-dark)] tracking-wide uppercase block">
+        <label class="text-xs font-semibold text-[var(--color-text-dark)] tracking-wide uppercase block font-mono">
           I want to
         </label>
         <div class="grid grid-cols-2 gap-3">
           <label
             :class="[
-              'flex flex-col items-center gap-1.5 p-4 border-2 rounded-xl cursor-pointer transition-all text-center',
+              'flex flex-col items-center gap-1.5 p-4 rounded-xl cursor-pointer transition-all text-center',
               role === 'DONOR'
-                ? 'border-[var(--color-primary)] bg-[var(--color-primary)]/8 text-[var(--color-text-dark)]'
-                : 'border-[var(--color-border)] bg-white text-[var(--color-text-muted)] hover:border-[var(--color-primary)]/40 hover:text-[var(--color-text-dark)]'
+                ? 'neu-card-inset border-2 border-[var(--color-primary)] text-[var(--color-primary)] font-bold'
+                : 'neu-card text-[var(--color-text-muted)] hover:text-[var(--color-text-dark)]'
             ]"
           >
             <input type="radio" v-model="role" value="DONOR" class="sr-only" />
             <span class="text-2xl">🍎</span>
-            <span class="text-xs font-semibold">Donate Food</span>
-            <span class="text-[10px] leading-tight text-[var(--color-text-muted)] hidden sm:block">
+            <span class="text-xs font-semibold font-body">Donate Food</span>
+            <span class="text-[10px] leading-tight font-body hidden sm:block">
               Share surplus meals
             </span>
           </label>
           <label
             :class="[
-              'flex flex-col items-center gap-1.5 p-4 border-2 rounded-xl cursor-pointer transition-all text-center',
+              'flex flex-col items-center gap-1.5 p-4 rounded-xl cursor-pointer transition-all text-center',
               role === 'RECEIVER'
-                ? 'border-[var(--color-primary)] bg-[var(--color-primary)]/8 text-[var(--color-text-dark)]'
-                : 'border-[var(--color-border)] bg-white text-[var(--color-text-muted)] hover:border-[var(--color-primary)]/40 hover:text-[var(--color-text-dark)]'
+                ? 'neu-card-inset border-2 border-[var(--color-primary)] text-[var(--color-primary)] font-bold'
+                : 'neu-card text-[var(--color-text-muted)] hover:text-[var(--color-text-dark)]'
             ]"
           >
             <input type="radio" v-model="role" value="RECEIVER" class="sr-only" />
             <span class="text-2xl">🤝</span>
-            <span class="text-xs font-semibold">Receive Food</span>
-            <span class="text-[10px] leading-tight text-[var(--color-text-muted)] hidden sm:block">
+            <span class="text-xs font-semibold font-body">Receive Food</span>
+            <span class="text-[10px] leading-tight font-body hidden sm:block">
               Find meals nearby
             </span>
           </label>
@@ -108,13 +108,13 @@
       </div>
 
       <!-- Terms -->
-      <p class="text-[11px] leading-normal text-[var(--color-text-muted)]">
+      <p class="text-[11px] leading-normal text-[var(--color-text-muted)] font-body">
         By clicking sign up, you agree to our
-        <a href="#" class="font-medium text-[var(--color-secondary)] hover:text-[var(--color-secondary-hover)] transition-colors underline underline-offset-2">
+        <a href="#" class="font-medium text-[var(--color-primary)] hover:underline">
           Terms of Service
         </a>
         and
-        <a href="#" class="font-medium text-[var(--color-secondary)] hover:text-[var(--color-secondary-hover)] transition-colors underline underline-offset-2">
+        <a href="#" class="font-medium text-[var(--color-primary)] hover:underline">
           Privacy Policy
         </a>.
       </p>
@@ -122,12 +122,12 @@
       <!-- Submit -->
       <button
         type="submit"
-        class="btn-primary w-full h-11 text-sm"
+        class="btn-primary w-full h-11 text-sm font-body"
         :disabled="isLoading"
       >
         <svg
           v-if="isLoading"
-          class="animate-spin -ml-1 mr-2 h-4 w-4 text-[var(--color-text-dark)]"
+          class="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
@@ -140,18 +140,18 @@
     </form>
 
     <!-- Sign in link -->
-    <p class="mt-7 text-center text-xs text-[var(--color-text-muted)]">
+    <p class="mt-7 text-center text-xs text-[var(--color-text-muted)] font-body">
       Already have an account?
       <router-link
         to="/auth/login"
-        class="font-semibold text-[var(--color-secondary)] hover:text-[var(--color-secondary-hover)] transition-colors"
+        class="font-semibold text-[var(--color-primary)] hover:underline"
       >
         Sign in
       </router-link>
     </p>
 
     <!-- Back link -->
-    <div class="mt-5 flex justify-center">
+    <div class="mt-5 flex justify-center font-body">
       <router-link
         to="/"
         class="inline-flex items-center gap-1.5 text-xs font-medium text-[var(--color-text-muted)] hover:text-[var(--color-text-dark)] transition-colors"

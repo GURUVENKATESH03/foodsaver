@@ -1,11 +1,11 @@
 <template>
   <span
     :class="[
-      'inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full tracking-wider uppercase',
-      variant === 'outline-deep' ? 'border border-[var(--color-border-deep)] text-[var(--color-text-light-muted)]' :
-      variant === 'outline' ? 'border border-[var(--color-border)] text-[var(--color-text-muted)]' :
-      variant === 'gold' ? 'bg-[var(--color-primary)]/20 text-[#A6732A]' :
-      'bg-[var(--color-border)] text-[var(--color-text-muted)]'
+      'inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-full tracking-wider uppercase font-mono shadow-xs',
+      variant === 'outline-deep' ? 'border border-slate-700 text-slate-300 bg-slate-800/80' :
+      variant === 'outline' ? 'border border-slate-300 text-slate-600 bg-white' :
+      variant === 'gold' ? 'bg-amber-500/15 text-amber-600 border border-amber-500/20' :
+      'bg-[var(--color-primary)]/10 text-[var(--color-primary)] border border-[var(--color-primary)]/20'
     ]"
   >
     <slot />

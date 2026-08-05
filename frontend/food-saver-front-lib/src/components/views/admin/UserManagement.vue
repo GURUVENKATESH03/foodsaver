@@ -3,10 +3,10 @@
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
       <div>
-        <h1 class="font-display text-2xl font-bold text-[var(--color-text-dark)]">User Management</h1>
-        <p class="text-sm text-[var(--color-text-muted)] mt-1">Manage platform users and their roles</p>
+        <h1 class="font-display text-3xl font-bold text-[var(--color-text-dark)]">User Management</h1>
+        <p class="text-sm text-[var(--color-text-muted)] mt-1 font-body">Manage platform users and their roles</p>
       </div>
-      <button class="btn-primary text-sm inline-flex items-center">
+      <button class="btn-primary text-sm inline-flex items-center font-body">
         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
         </svg>
@@ -15,21 +15,21 @@
     </div>
 
     <!-- Filters -->
-    <div class="bg-white rounded-2xl border border-[var(--color-border)] p-4">
+    <div class="neu-card p-4">
       <div class="flex flex-col md:flex-row gap-3">
         <div class="flex-1">
           <input
             v-model="searchQuery"
             type="text"
             placeholder="Search users by name or email..."
-            class="block w-full h-10 rounded-xl border border-[var(--color-border)] bg-white px-4 text-sm text-[var(--color-text-dark)] placeholder:text-[var(--color-text-muted)] transition-all focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20"
+            class="neu-input block w-full h-11 px-4 text-sm font-body"
             @input="onSearch"
           />
         </div>
         <div class="w-full md:w-36">
           <select
             v-model="roleFilter"
-            class="block w-full h-10 rounded-xl border border-[var(--color-border)] bg-white px-3 text-sm text-[var(--color-text-dark)] transition-all focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20"
+            class="neu-input block w-full h-11 px-3 text-sm font-body cursor-pointer"
             @change="fetchUsers"
           >
             <option value="">All Roles</option>
@@ -41,7 +41,7 @@
         <div class="w-full md:w-36">
           <select
             v-model="statusFilter"
-            class="block w-full h-10 rounded-xl border border-[var(--color-border)] bg-white px-3 text-sm text-[var(--color-text-dark)] transition-all focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20"
+            class="neu-input block w-full h-11 px-3 text-sm font-body cursor-pointer"
             @change="fetchUsers"
           >
             <option value="">All Status</option>
@@ -54,38 +54,38 @@
     </div>
 
     <!-- Users Table -->
-    <div class="bg-white rounded-2xl border border-[var(--color-border)] overflow-hidden">
+    <div class="neu-card overflow-hidden">
       <div class="overflow-x-auto">
-        <table class="min-w-full divide-y divide-[var(--color-border)]">
+        <table class="min-w-full divide-y divide-slate-200">
           <thead>
-            <tr class="bg-[var(--color-bg-warm)]">
-              <th class="px-6 py-3 text-left text-[11px] font-semibold text-[var(--color-text-muted)] uppercase tracking-wider">User</th>
-              <th class="px-6 py-3 text-left text-[11px] font-semibold text-[var(--color-text-muted)] uppercase tracking-wider">Role</th>
-              <th class="px-6 py-3 text-left text-[11px] font-semibold text-[var(--color-text-muted)] uppercase tracking-wider">Status</th>
-              <th class="px-6 py-3 text-left text-[11px] font-semibold text-[var(--color-text-muted)] uppercase tracking-wider">Joined</th>
-              <th class="px-6 py-3 text-left text-[11px] font-semibold text-[var(--color-text-muted)] uppercase tracking-wider">Actions</th>
+            <tr class="bg-slate-100/70">
+              <th class="px-6 py-3 text-left text-[11px] font-semibold text-slate-500 uppercase tracking-wider font-mono">User</th>
+              <th class="px-6 py-3 text-left text-[11px] font-semibold text-slate-500 uppercase tracking-wider font-mono">Role</th>
+              <th class="px-6 py-3 text-left text-[11px] font-semibold text-slate-500 uppercase tracking-wider font-mono">Status</th>
+              <th class="px-6 py-3 text-left text-[11px] font-semibold text-slate-500 uppercase tracking-wider font-mono">Joined</th>
+              <th class="px-6 py-3 text-left text-[11px] font-semibold text-slate-500 uppercase tracking-wider font-mono">Actions</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-[var(--color-border)]">
+          <tbody class="divide-y divide-slate-200 font-body">
             <tr v-if="loading">
               <td colspan="5" class="px-6 py-12 text-center">
                 <div class="w-6 h-6 border-2 border-[var(--color-primary)] border-t-transparent rounded-full animate-spin mx-auto" />
               </td>
             </tr>
             <tr v-else-if="paginatedUsers.length === 0">
-              <td colspan="5" class="px-6 py-12 text-center text-sm text-[var(--color-text-muted)]">
+              <td colspan="5" class="px-6 py-12 text-center text-sm text-[var(--color-text-muted)] font-body">
                 No users found
               </td>
             </tr>
-            <tr v-for="user in paginatedUsers" :key="user.id" class="hover:bg-[var(--color-bg-warm)]/50 transition-colors">
+            <tr v-for="user in paginatedUsers" :key="user.id" class="hover:bg-slate-50/80 transition-colors">
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="flex items-center gap-3">
-                  <div class="w-8 h-8 rounded-full bg-[var(--color-primary)]/15 flex items-center justify-center text-xs font-bold text-[var(--color-primary)] flex-shrink-0">
+                  <div class="w-9 h-9 rounded-full bg-[var(--color-primary)] text-white flex items-center justify-center text-xs font-bold font-mono shadow-sm">
                     {{ (user.name || '?').charAt(0) }}
                   </div>
                   <div>
-                    <div class="text-sm font-medium text-[var(--color-text-dark)]">{{ user.name }}</div>
-                    <div class="text-xs text-[var(--color-text-muted)]">{{ user.email }}</div>
+                    <div class="text-sm font-medium text-[var(--color-text-dark)] font-body">{{ user.name }}</div>
+                    <div class="text-xs text-[var(--color-text-muted)] font-body">{{ user.email }}</div>
                   </div>
                 </div>
               </td>
@@ -95,22 +95,22 @@
               <td class="px-6 py-4 whitespace-nowrap">
                 <span
                   :class="[
-                    'px-2.5 py-0.5 text-[11px] font-semibold rounded-full',
-                    user.active ? 'bg-[var(--color-secondary)]/10 text-[var(--color-secondary)]' :
-                    user.locked ? 'bg-[var(--color-urgent)]/10 text-[var(--color-urgent)]' : 'bg-[var(--color-primary)]/12 text-[#A6732A]'
+                    'px-2.5 py-0.5 text-[11px] font-semibold rounded-full font-mono',
+                    user.active ? 'bg-emerald-500/10 text-emerald-600' :
+                    user.locked ? 'bg-red-500/10 text-red-600' : 'bg-amber-500/10 text-amber-600'
                   ]"
                 >
                   {{ user.active ? 'Active' : user.locked ? 'Locked' : 'Inactive' }}
                 </span>
               </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-[var(--color-text-muted)]">
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-mono text-[var(--color-text-muted)]">
                 {{ user.createdAt }}
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="flex items-center gap-1">
                   <button
                     @click="toggleUserStatus(user)"
-                    class="p-1.5 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary)]/8 transition-all"
+                    class="p-1.5 rounded-lg text-slate-400 hover:text-[var(--color-primary)] hover:bg-[var(--color-primary)]/10 transition-all"
                     :title="user.active ? 'Deactivate' : 'Activate'"
                   >
                     <svg v-if="user.active" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -123,7 +123,7 @@
                   </button>
                   <button
                     @click="editUser(user)"
-                    class="p-1.5 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--color-primary)]/8 transition-all"
+                    class="p-1.5 rounded-lg text-slate-400 hover:text-[var(--color-primary)] hover:bg-[var(--color-primary)]/10 transition-all"
                     title="Edit user"
                   >
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -132,7 +132,7 @@
                   </button>
                   <button
                     @click="confirmDeleteUser(user)"
-                    class="p-1.5 rounded-lg text-[var(--color-text-muted)] hover:text-[var(--color-urgent)] hover:bg-[var(--color-urgent)]/8 transition-all"
+                    class="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-all"
                     title="Delete user"
                   >
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -148,25 +148,25 @@
     </div>
 
     <!-- Pagination -->
-    <div v-if="totalPages > 1" class="flex items-center justify-between">
-      <p class="text-sm text-[var(--color-text-muted)]">
+    <div v-if="totalPages > 1" class="flex items-center justify-between font-mono text-xs">
+      <p class="text-[var(--color-text-muted)]">
         Showing {{ (currentPage - 1) * perPage + 1 }}–{{ Math.min(currentPage * perPage, totalUsers) }} of {{ totalUsers }}
       </p>
       <div class="flex items-center gap-2">
         <button
           @click="changePage(currentPage - 1)"
           :disabled="currentPage === 1"
-          class="p-2 rounded-xl border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text-dark)] hover:bg-[var(--color-bg-warm)] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+          class="btn-outline p-2 text-xs"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
           </svg>
         </button>
-        <span class="text-sm text-[var(--color-text-muted)] px-1">{{ currentPage }} / {{ totalPages }}</span>
+        <span class="text-[var(--color-text-muted)] px-1">{{ currentPage }} / {{ totalPages }}</span>
         <button
           @click="changePage(currentPage + 1)"
           :disabled="currentPage === totalPages"
-          class="p-2 rounded-xl border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text-dark)] hover:bg-[var(--color-bg-warm)] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+          class="btn-outline p-2 text-xs"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />

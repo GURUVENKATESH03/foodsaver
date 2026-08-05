@@ -1,17 +1,17 @@
 <template>
-  <div class="bg-white rounded-2xl border border-[var(--color-border)] p-4">
+  <div class="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm">
     <div class="flex flex-col md:flex-row gap-3">
-      <!-- Search -->
+      <!-- Search Input -->
       <div class="flex-1">
         <div class="relative">
-          <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--color-text-muted)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
           <input
             v-model="localFilters.search"
             type="text"
             placeholder="Search donations..."
-            class="block w-full h-10 rounded-xl border border-[var(--color-border)] bg-white pl-10 pr-4 text-sm text-[var(--color-text-dark)] placeholder:text-[var(--color-text-muted)] transition-all focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20"
+            class="w-full h-11 pl-10 pr-4 bg-white border border-slate-300 rounded-xl text-sm font-body text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition-all"
             @input="onSearchInput"
           />
         </div>
@@ -21,7 +21,7 @@
       <div class="w-full md:w-44">
         <select
           v-model="localFilters.category"
-          class="block w-full h-10 rounded-xl border border-[var(--color-border)] bg-white px-3 text-sm text-[var(--color-text-dark)] transition-all focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20"
+          class="w-full h-11 px-3.5 bg-white border border-slate-300 rounded-xl text-sm font-body text-slate-900 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition-all cursor-pointer"
           @change="emitFilters"
         >
           <option value="">All Categories</option>
@@ -35,7 +35,7 @@
       <div class="w-full md:w-36">
         <select
           v-model="localFilters.status"
-          class="block w-full h-10 rounded-xl border border-[var(--color-border)] bg-white px-3 text-sm text-[var(--color-text-dark)] transition-all focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20"
+          class="w-full h-11 px-3.5 bg-white border border-slate-300 rounded-xl text-sm font-body text-slate-900 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition-all cursor-pointer"
           @change="emitFilters"
         >
           <option value="">All Status</option>
@@ -49,7 +49,7 @@
       <div class="w-full md:w-36">
         <select
           v-model="localFilters.distance"
-          class="block w-full h-10 rounded-xl border border-[var(--color-border)] bg-white px-3 text-sm text-[var(--color-text-dark)] transition-all focus:border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20"
+          class="w-full h-11 px-3.5 bg-white border border-slate-300 rounded-xl text-sm font-body text-slate-900 focus:outline-none focus:border-teal-600 focus:ring-2 focus:ring-teal-600/20 transition-all cursor-pointer"
           @change="emitFilters"
         >
           <option :value="5">Within 5 km</option>
@@ -60,10 +60,10 @@
         </select>
       </div>
 
-      <!-- Clear -->
+      <!-- Clear Button -->
       <button
         @click="clearFilters"
-        class="btn-outline h-10 text-xs whitespace-nowrap"
+        class="h-11 px-5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-xs rounded-xl border border-slate-200 transition-all whitespace-nowrap"
       >
         Clear
       </button>

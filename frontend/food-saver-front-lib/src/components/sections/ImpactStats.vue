@@ -1,21 +1,21 @@
 <template>
-  <section class="bg-[var(--color-bg-deep)] section-padding">
-    <div class="container-narrow text-center">
-      <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] text-xs font-semibold text-[var(--color-text-light-muted)] tracking-wider uppercase mb-4">
-        Our impact
+  <section class="bg-[#1E293B] py-20 md:py-28 text-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-800 border border-slate-700 text-xs font-semibold text-slate-300 tracking-wider uppercase mb-4 font-mono">
+        Community Impact
       </span>
-      <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--color-text-light)] tracking-tight mb-4">
+      <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
         Small actions, big difference
       </h2>
-      <p class="text-sm text-[var(--color-text-light-muted)] max-w-md mx-auto mb-12">
-        Every shared meal means less waste and more connection. These are placeholder stats — real numbers coming soon.
+      <p class="text-sm text-slate-300 max-w-md mx-auto mb-16 font-body">
+        Every shared meal means less food waste and stronger neighborhood connections.
       </p>
 
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-12">
-        <div v-for="(stat, i) in stats" :key="i" class="reveal">
-          <div class="chalk-counter text-5xl sm:text-6xl mb-2">{{ stat.value }}</div>
-          <div class="chalk-label text-base">{{ stat.label }}</div>
-          <p class="text-xs text-[var(--color-text-light-muted)] mt-1">{{ stat.subtext }}</p>
+        <div v-for="(stat, i) in stats" :key="i" class="p-6 rounded-2xl bg-slate-800/60 border border-slate-700/80 shadow-md">
+          <div class="font-mono text-4xl sm:text-5xl font-bold text-[var(--color-primary)] mb-2">{{ stat.value }}</div>
+          <div class="font-display font-semibold text-lg text-white mb-1">{{ stat.label }}</div>
+          <p class="font-mono text-xs text-slate-400">{{ stat.subtext }}</p>
         </div>
       </div>
     </div>
@@ -27,17 +27,17 @@ const stats = [
   {
     value: '1,240+',
     label: 'meals shared',
-    subtext: 'Since launch — placeholder'
+    subtext: 'Since launch'
   },
   {
     value: '840 kg',
     label: 'food waste avoided',
-    subtext: 'Estimated — placeholder'
+    subtext: 'Estimated savings'
   },
   {
     value: '380+',
     label: 'active hosts',
-    subtext: 'In your community — placeholder'
+    subtext: 'In local community'
   }
 ]
 </script>

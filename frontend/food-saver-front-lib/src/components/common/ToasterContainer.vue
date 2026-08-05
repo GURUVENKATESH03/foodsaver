@@ -47,10 +47,10 @@ const toasts = computed(() => store.toasts)
 const removeToast = store.removeToast
 
 const toastTypeClasses = {
-  success: 'bg-green-50 border-green-200 text-green-800',
-  error: 'bg-red-50 border-red-200 text-red-800',
-  warning: 'bg-yellow-50 border-yellow-200 text-yellow-800',
-  info: 'bg-blue-50 border-blue-200 text-blue-800'
+  success: 'bg-[var(--color-secondary)]/15 border-[var(--color-secondary)]/30 text-[var(--color-secondary)]',
+  error: 'bg-[var(--color-urgent)]/15 border-[var(--color-urgent)]/30 text-[var(--color-urgent)]',
+  warning: 'bg-[var(--color-primary)]/15 border-[var(--color-primary)]/30 text-[#A6732A]',
+  info: 'bg-[var(--color-bg-deep)] border-[var(--color-border-deep)] text-[var(--color-text-light)]'
 }
 </script>
 
